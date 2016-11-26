@@ -26,7 +26,10 @@ import com.phearun.service.impl.Vivotek;
 public class HikvisionController {
 
 	@RequestMapping(value = "/{model}", method = RequestMethod.GET)
-	public ResponseEntity<String> remote(@PathVariable("model") String model, @RequestParam("command") String move) {
+	public ResponseEntity<String> remote(@PathVariable("model") String model, 
+			@RequestParam("command") String move,
+			@RequestParam(defaultValue = "50", value="speed", required=false) int speed) {
+		
 		System.out.println("remoting...");
 		PtzInterface ptz = null;
 		
@@ -36,10 +39,10 @@ public class HikvisionController {
 		}
 		
 		switch(move){
-			case "left"  : ptz.left(40);  break;
-			case "right" : ptz.right(40); break;
-			case "up"    : ptz.up(40);    break;
-			case "down"  : ptz.down(40);  break;
+			case "left"  : ptz.left(speed);  break;
+			case "right" : ptz.right(speed); break;
+			case "up"    : ptz.up(speed);    break;
+			case "down"  : ptz.down(speed);  break;
 			case "stop"  : ptz.stop();    break;
 		}
 		

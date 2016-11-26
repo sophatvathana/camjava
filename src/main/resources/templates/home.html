@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<iframe id="cameraFrame" src="stream/hik" width="400px" height="300px" frameborder="0">
+		<p>Your browser doesn't support iframe!</p>
+	</iframe><br>
+	<button id="left">Left</button>
+	<button id="right">Right</button>
+	<button id="stop">Stop</button>
+	<button id="up">Up</button>
+	<button id="down">Down</button>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			
+			var Camera = {};
+			
+			$('#left').on('click', function() {
+				Camera.action('left');
+			});
+			$('#right').on('click', function() {
+				Camera.action('right');
+			});
+			$('#stop').on('click', function() {
+				Camera.action();
+			});
+			$('#up').on('click', function() {
+				Camera.action('up');
+			});
+			$('#down').on('click', function() {
+				Camera.action('down');
+			});
+			
+			Camera.action = function(command){
+				$.ajax({
+					url: 'ptz/hik/stop',
+					method: 'GET',
+					success: function(response){
+						$.ajax({
+							url: `ptz/hik/${command}`,
+							method: 'GET',
+							success: function(response){
+								console.log(response);
+							},
+							error: function(response){
+								console.log(response);
+							}
+						});	
+					},
+					error: function(response){
+						console.log(response);
+					}
+				});
+				
+			};
+			
+			setTimeout(function(){
+				$('#cameraFrame').contents().find('img').css({'height':'100%', 'width':'100%'});				
+			}, 500);
+			
+			
+		});
+	</script>
+
+</body>
+</html>
