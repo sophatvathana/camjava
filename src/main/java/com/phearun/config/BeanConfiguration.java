@@ -29,7 +29,7 @@ public class BeanConfiguration {
 	
 	@Bean
 	public HikvisionCamera hikvisionCamera(){
-		HikvisionCamera hik = new HikvisionCamera("DS-2CD2Q10FD-IW", "192.168.178.146", 80, "admin", "12345", 554, 1, true);
+		HikvisionCamera hik = new HikvisionCamera("DS-2CD2Q10FD-IW", "192.168.0.44", 80, "admin", "12345", 554, 1, true);
 		return hik;
 	}
 	

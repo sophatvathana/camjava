@@ -14,12 +14,13 @@ public class RtspStream extends ExternalBase {
 
     static {
         String path = getNativePath();
+        System.out.println(path);
         logger.info(System.getProperty("java.library.path"));
         logger.info(path);
-        if (getOSType().contains("windows"))
-        	loadNativeLibrary(path, "strmrecv.dll");
-        else 
-        	loadNativeLibrary(path, "strmrecv.so");
+        //if (getOSType().contains("windows"))
+        //	loadNativeLibrary(path, "strmrecv.so.dll");
+        //else
+        	loadNativeLibrary(path, "strmrecv.dylib");
         
     }
 
@@ -30,9 +31,9 @@ public class RtspStream extends ExternalBase {
 
     static private String getNativePath() {
         String homeFolder = new File(System.getProperty("user.dir")).getAbsolutePath();
+        System.out.print(homeFolder);
         String arch = System.getProperty("os.arch");
         String path = String.format("%s%snative%s%s%s%s%s", homeFolder, File.separator, File.separator, getOSType(), File.separator, arch, File.separator);
-        
         return path;
     }
 
@@ -42,7 +43,8 @@ public class RtspStream extends ExternalBase {
     
     public void initialize() {
         release();
-
+        System.out.println("********************** Scan for native path *******************************");
+        System.out.println(getNativePath());
         handler = createContextInternal(getNativePath());
     }
 

@@ -11,6 +11,7 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.xerces.impl.xpath.XPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +19,15 @@ public class ExternalBase {
 	static private Logger logger = LoggerFactory.getLogger(ExternalBase.class);
 
 	protected static String getOSType() {
-		String name = System.getProperty("os.name");
+		String name = System.getProperty("os.name").toLowerCase();
+		System.out.print("*********************** OS detector ***************************");
+		System.out.print(System.getProperty("os.name"));
 		if (name.contains("Windows"))
 			return "windows";
+		else if (name.contains("mac"))
+			return "mac";
 		else
-			return "windows";
+			return "mac";
 	}
 	/**
 	 * Extract the specified library file to the target folder
@@ -34,6 +39,7 @@ public class ExternalBase {
 	 */
 	protected static boolean extractAndLoadLibraryFile(String basePath, String libraryFileName, String targetFolder) {
 		//logger.debug("Load Library: {}{}", basePath, libraryFileName);
+		System.out.print("*********************** Load Library ***************************");
 		System.out.println(String.format("Load Library: %s %s", basePath, libraryFileName));
 		String nativeLibraryFilePath = basePath + libraryFileName;
 
@@ -139,5 +145,8 @@ public class ExternalBase {
 		}
 		else
 			return false;
+	}
+	private static void main(String[] arg){
+		ExternalBase.getOSType();
 	}
 }

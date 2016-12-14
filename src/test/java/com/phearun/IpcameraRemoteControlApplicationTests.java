@@ -11,6 +11,7 @@ public class IpcameraRemoteControlApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }
