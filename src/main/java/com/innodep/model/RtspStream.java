@@ -1,6 +1,7 @@
 package com.innodep.model;
 
 import java.io.File;
+import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class RtspStream extends ExternalBase {
         //if (getOSType().contains("windows"))
         //	loadNativeLibrary(path, "strmrecv.so.dll");
         //else
-        	loadNativeLibrary(path, "strmrecv.dylib");
+        	loadNativeLibrary(path, "strmrecv.so");
         
     }
 
@@ -70,4 +71,5 @@ public class RtspStream extends ExternalBase {
 
         return null;
     }
+
 }

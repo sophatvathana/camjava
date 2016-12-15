@@ -1,5 +1,6 @@
 package com.innodep.model;
 
+import java.awt.*;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,9 +26,9 @@ public class ExternalBase {
 		if (name.contains("Windows"))
 			return "windows";
 		else if (name.contains("mac"))
-			return "mac";
+			return "linux";
 		else
-			return "mac";
+			return "linux";
 	}
 	/**
 	 * Extract the specified library file to the target folder
@@ -133,6 +134,8 @@ public class ExternalBase {
 			logger.info("LOAD: {}", libPath.getAbsolutePath());
 
 			try {
+				System.out.println("************************* AbsolutePath **********************************");
+				System.out.println(new File(path, name).getAbsolutePath());
 				System.load(new File(path, name).getAbsolutePath());
 				return true;
 			}

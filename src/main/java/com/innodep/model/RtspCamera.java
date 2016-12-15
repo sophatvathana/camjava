@@ -73,7 +73,7 @@ public class RtspCamera extends IpCamera implements Runnable {
 		if (rtspContinue) {
 			rtspContinue = false;
 			try {
-				rtspThread.join(1000);
+				rtspThread.join(10000);
 			} catch (InterruptedException e) {
 				logger.info(e.getMessage());
 			}
@@ -146,4 +146,5 @@ public class RtspCamera extends IpCamera implements Runnable {
 		rtspContinue = false;
 		logger.info("Stop : {}", url);
 	}
+
 }
